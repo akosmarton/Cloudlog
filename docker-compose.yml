@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+  cloudlog:
+    image: makos/cloudlog:1.9-makos
+    volumes:
+      - config:/var/www/html/application/config
+      - backup:/var/www/html/backup
+      - uploads:/var/www/html/uploads
+    ports:
+      - 8080:80
+
+  mariadb:
+    image: mariadb:10.3
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  config:
+    driver: local
+  backup:
+    driver: local
+  uploads:
+    driver: local
+  db:
+    driver: local
